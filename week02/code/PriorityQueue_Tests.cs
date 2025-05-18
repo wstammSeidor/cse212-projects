@@ -15,9 +15,9 @@ public class PriorityQueueTests
         priorityQueue.Enqueue("A", 1);
         priorityQueue.Enqueue("B", 3);
         priorityQueue.Enqueue("C", 2);
-    
+
         var result = priorityQueue.Dequeue();
-    
+
         Assert.AreEqual("B", result);
     }
 
@@ -39,4 +39,16 @@ public class PriorityQueueTests
     }
 
     // Add more test cases as needed below.
+    [TestMethod]
+    // Scenario: Try to dequeue from an empty queue
+    // Expected Result: InvalidOperationException should be thrown
+    // Defect(s) Found: ?
+    public void TestPriorityQueue_3()
+    {
+        var priorityQueue = new PriorityQueue();
+        Assert.ThrowsException<InvalidOperationException>(() =>
+        {
+            priorityQueue.Dequeue();
+        });
+    }
 }
