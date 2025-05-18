@@ -12,7 +12,13 @@ public class PriorityQueueTests
     public void TestPriorityQueue_1()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        priorityQueue.Enqueue("A", 1);
+        priorityQueue.Enqueue("B", 3);
+        priorityQueue.Enqueue("C", 2);
+    
+        var result = priorityQueue.Dequeue();
+    
+        Assert.AreEqual("B", result);
     }
 
     [TestMethod]
@@ -22,7 +28,14 @@ public class PriorityQueueTests
     public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+        priorityQueue.Enqueue("A", 5);
+        priorityQueue.Enqueue("B", 5);
+        priorityQueue.Enqueue("C", 2);
+
+        var result = priorityQueue.Dequeue();
+        Console.WriteLine(priorityQueue.ToString());
+        Assert.AreEqual("A", result); // Assuming A is dequeued first due to FIFO for equal priority
+
     }
 
     // Add more test cases as needed below.
