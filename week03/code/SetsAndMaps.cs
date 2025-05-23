@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Diagnostics;
 
 public static class SetsAndMaps
 {
@@ -22,7 +23,24 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        var arrayWithoutDupliates = new HashSet<string>(words);
+        var array2 = arrayWithoutDupliates;
+        var result = new List<string>();
+        foreach (var x in arrayWithoutDupliates)
+        {
+            var reversed = new string(x.Reverse().ToArray());
+
+            if (array2.Contains(reversed) && x != reversed)
+            {
+                array2.Remove(x);
+                array2.Remove(reversed);
+                var pair = $"{x} & {reversed}";
+                result.Add(pair);
+            }    
+        }
+        Debug.WriteLine("Esto sí se ve cuando corres un test.");
+
+        return result.ToArray();
     }
 
     /// <summary>
@@ -42,7 +60,12 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
-            // TODO Problem 2 - ADD YOUR CODE HERE
+            var degree = fields[3];
+
+            if (degrees.ContainsKey(degree))
+                degrees[degree] ++;
+            else
+                 degrees[degree] = 1 ;
         }
 
         return degrees;
@@ -66,9 +89,28 @@ public static class SetsAndMaps
     /// </summary>
     public static bool IsAnagram(string word1, string word2)
     {
-        // TODO Problem 3 - ADD YOUR CODE HERE
-        return false;
+        word1 = word1.ToLower().Replace(" ", "");
+        word2 = word2.ToLower().Replace(" ", "");
+    
+        var d1 = new Dictionary<char, int>();
+        var d2 = new Dictionary<char, int>();
+    
+        foreach (var c in word1)
+            d1[c] = d1.ContainsKey(c) ? d1[c] + 1 : 1;
+    
+        foreach (var c in word2)
+            d2[c] = d2.ContainsKey(c) ? d2[c] + 1 : 1;
+    
+        if (d1.Count != d2.Count)
+            return false;
+    
+        foreach (var pair in d1)
+            if (!d2.ContainsKey(pair.Key) || d2[pair.Key] != pair.Value)
+                return false;
+    
+        return true;
     }
+
 
     /// <summary>
     /// This function will read JSON (Javascript Object Notation) data from the 

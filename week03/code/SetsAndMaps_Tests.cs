@@ -11,7 +11,7 @@ public class FindPairsTests
     {
         var actual = SetsAndMaps.FindPairs(["am", "at", "ma", "if", "fi"]);
         var expected = new[] { "ma & am", "fi & if" };
-
+        Console.WriteLine(actual);
         Assert.AreEqual(expected.Length, actual.Length);
         Assert.AreEqual(Canonicalize(expected), Canonicalize(actual));
     }
