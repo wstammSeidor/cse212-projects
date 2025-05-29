@@ -36,7 +36,7 @@ public static class SetsAndMaps
                 array2.Remove(reversed);
                 var pair = $"{x} & {reversed}";
                 result.Add(pair);
-            }    
+            }
         }
         Debug.WriteLine("Esto sí se ve cuando corres un test.");
 
@@ -63,9 +63,9 @@ public static class SetsAndMaps
             var degree = fields[3];
 
             if (degrees.ContainsKey(degree))
-                degrees[degree] ++;
+                degrees[degree]++;
             else
-                 degrees[degree] = 1 ;
+                degrees[degree] = 1;
         }
 
         return degrees;
@@ -91,23 +91,23 @@ public static class SetsAndMaps
     {
         word1 = word1.ToLower().Replace(" ", "");
         word2 = word2.ToLower().Replace(" ", "");
-    
+
         var d1 = new Dictionary<char, int>();
         var d2 = new Dictionary<char, int>();
-    
+
         foreach (var c in word1)
             d1[c] = d1.ContainsKey(c) ? d1[c] + 1 : 1;
-    
+
         foreach (var c in word2)
             d2[c] = d2.ContainsKey(c) ? d2[c] + 1 : 1;
-    
+
         if (d1.Count != d2.Count)
             return false;
-    
+
         foreach (var pair in d1)
             if (!d2.ContainsKey(pair.Key) || d2[pair.Key] != pair.Value)
                 return false;
-    
+
         return true;
     }
 
@@ -144,13 +144,47 @@ public static class SetsAndMaps
         {
             var place = feature.Properties.Place;
             var mag = feature.Properties.Mag;
-    
+
             if (!string.IsNullOrEmpty(place) && mag.HasValue)
             {
                 results.Add($"{place} - Mag {mag.Value}");
             }
         }
-    
+
         return results.ToArray();
     }
+
+
+
+    //Describe how you would write a function to find the intersection of two sets. Your solution should NOT use the built-in intersection method.
+    // The Big O performance of your approach.
+    // Highlight at least 3 test cases that you would try to make sure your approach would work.
+    public static HashSet<int> FindIntersection(HashSet<int> setA, HashSet<int> setB)
+    {
+        var result = new HashSet<int>();
+        foreach (var item in setA)
+        {
+            if (setB.Contains(item))
+            {
+                result.Add(item);
+            }
+        }
+        return result;
+    }
+
+
+
+    //Describe how you would write a function to find the union of two sets. Your solution should NOT use the built-in union method.
+    // The Big O performance of your approach.
+    // Highlight at least 3 test cases that you would try to make sure your approach would work.
+    public static HashSet<int> FindUnion(HashSet<int> setA, HashSet<int> setB)
+    {
+        var result = new HashSet<int>(setA);
+        foreach (var item in setB)
+        {
+            result.Add(item);
+        }
+        return result;
+    }
+
 }
